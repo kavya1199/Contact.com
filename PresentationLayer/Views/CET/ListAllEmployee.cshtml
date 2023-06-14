@@ -1,0 +1,94 @@
+﻿@model IEnumerable<PresentationLayer.Models.EmployeeModel>
+
+@{
+    ViewBag.Title = "ListAllEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ListAllEmployee</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_Full_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_Join_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_Experience)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_Career_Level)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_Skill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Off_Shore_Start_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Off_Shore_End_Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_Full_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_Company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_Join_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_Experience)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_Career_Level)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_Skill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Off_Shore_Start_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Off_Shore_End_Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

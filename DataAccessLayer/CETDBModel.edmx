@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CETDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employee_Details">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_Full_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Employee_Address" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Employee_Phone" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Employee_Company" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Employee_Join_Date" Type="date" Nullable="false" />
+          <Property Name="Employee_Experience" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Employee_Career_Level" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Employee_Skill" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Off_Shore_Start_Date" Type="date" Nullable="false" />
+          <Property Name="Off_Shore_End_Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Details">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_First_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_Last_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_EmailId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Function Name="GetAllEmployeesByCompany" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="empCName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetAllEmployeesByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="empName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetAllEmployeesBySkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="skillName" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CETDBModelStoreContainer">
+          <EntitySet Name="Employee_Details" EntityType="Self.Employee_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Details" EntityType="Self.User_Details" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CETDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee_Details">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Full_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Employee_Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Employee_Phone" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Employee_Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Employee_Join_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Employee_Experience" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Employee_Career_Level" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Employee_Skill" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Off_Shore_Start_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Off_Shore_End_Date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="User_Details">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="CETDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employee_Details" EntityType="Self.Employee_Details" />
+          <EntitySet Name="User_Details" EntityType="Self.User_Details" />
+          <FunctionImport Name="GetAllEmployeesByCompany" ReturnType="Collection(CETDBModel.GetAllEmployeesByCompany_Result)">
+            <Parameter Name="empCName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllEmployeesByName" ReturnType="Collection(CETDBModel.GetAllEmployeesByName_Result)">
+            <Parameter Name="empName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllEmployeesBySkill" ReturnType="Collection(CETDBModel.GetAllEmployeesBySkill_Result)">
+            <Parameter Name="skillName" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAllEmployeesByCompany_Result">
+          <Property Type="Int32" Name="Employee_ID" Nullable="false" />
+          <Property Type="String" Name="Employee_Full_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Employee_Address" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Employee_Phone" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Employee_Company" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Employee_Join_Date" Nullable="false" />
+          <Property Type="Decimal" Name="Employee_Experience" Nullable="false" Precision="4" Scale="2" />
+          <Property Type="String" Name="Employee_Career_Level" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Employee_Skill" Nullable="false" MaxLength="200" />
+          <Property Type="DateTime" Name="Off_Shore_Start_Date" Nullable="false" />
+          <Property Type="DateTime" Name="Off_Shore_End_Date" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllEmployeesByName_Result">
+          <Property Type="Int32" Name="Employee_ID" Nullable="false" />
+          <Property Type="String" Name="Employee_Full_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Employee_Address" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Employee_Phone" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Employee_Company" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Employee_Join_Date" Nullable="false" />
+          <Property Type="Decimal" Name="Employee_Experience" Nullable="false" Precision="4" Scale="2" />
+          <Property Type="String" Name="Employee_Career_Level" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Employee_Skill" Nullable="false" MaxLength="200" />
+          <Property Type="DateTime" Name="Off_Shore_Start_Date" Nullable="false" />
+          <Property Type="DateTime" Name="Off_Shore_End_Date" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllEmployeesBySkill_Result">
+          <Property Type="Int32" Name="Employee_ID" Nullable="false" />
+          <Property Type="String" Name="Employee_Full_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Employee_Address" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Employee_Phone" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Employee_Company" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Employee_Join_Date" Nullable="false" />
+          <Property Type="Decimal" Name="Employee_Experience" Nullable="false" Precision="4" Scale="2" />
+          <Property Type="String" Name="Employee_Career_Level" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Employee_Skill" Nullable="false" MaxLength="200" />
+          <Property Type="DateTime" Name="Off_Shore_Start_Date" Nullable="false" />
+          <Property Type="DateTime" Name="Off_Shore_End_Date" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CETDBModelStoreContainer" CdmEntityContainer="CETDBContext">
+          <EntitySetMapping Name="Employee_Details">
+            <EntityTypeMapping TypeName="CETDBModel.Employee_Details">
+              <MappingFragment StoreEntitySet="Employee_Details">
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Employee_Full_Name" ColumnName="Employee_Full_Name" />
+                <ScalarProperty Name="Employee_Address" ColumnName="Employee_Address" />
+                <ScalarProperty Name="Employee_Phone" ColumnName="Employee_Phone" />
+                <ScalarProperty Name="Employee_Company" ColumnName="Employee_Company" />
+                <ScalarProperty Name="Employee_Join_Date" ColumnName="Employee_Join_Date" />
+                <ScalarProperty Name="Employee_Experience" ColumnName="Employee_Experience" />
+                <ScalarProperty Name="Employee_Career_Level" ColumnName="Employee_Career_Level" />
+                <ScalarProperty Name="Employee_Skill" ColumnName="Employee_Skill" />
+                <ScalarProperty Name="Off_Shore_Start_Date" ColumnName="Off_Shore_Start_Date" />
+                <ScalarProperty Name="Off_Shore_End_Date" ColumnName="Off_Shore_End_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Details">
+            <EntityTypeMapping TypeName="CETDBModel.User_Details">
+              <MappingFragment StoreEntitySet="User_Details">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="User_First_Name" ColumnName="User_First_Name" />
+                <ScalarProperty Name="User_Last_Name" ColumnName="User_Last_Name" />
+                <ScalarProperty Name="User_EmailId" ColumnName="User_EmailId" />
+                <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllEmployeesByCompany" FunctionName="CETDBModel.Store.GetAllEmployeesByCompany">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CETDBModel.GetAllEmployeesByCompany_Result">
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Employee_Full_Name" ColumnName="Employee_Full_Name" />
+                <ScalarProperty Name="Employee_Address" ColumnName="Employee_Address" />
+                <ScalarProperty Name="Employee_Phone" ColumnName="Employee_Phone" />
+                <ScalarProperty Name="Employee_Company" ColumnName="Employee_Company" />
+                <ScalarProperty Name="Employee_Join_Date" ColumnName="Employee_Join_Date" />
+                <ScalarProperty Name="Employee_Experience" ColumnName="Employee_Experience" />
+                <ScalarProperty Name="Employee_Career_Level" ColumnName="Employee_Career_Level" />
+                <ScalarProperty Name="Employee_Skill" ColumnName="Employee_Skill" />
+                <ScalarProperty Name="Off_Shore_Start_Date" ColumnName="Off_Shore_Start_Date" />
+                <ScalarProperty Name="Off_Shore_End_Date" ColumnName="Off_Shore_End_Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllEmployeesByName" FunctionName="CETDBModel.Store.GetAllEmployeesByName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CETDBModel.GetAllEmployeesByName_Result">
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Employee_Full_Name" ColumnName="Employee_Full_Name" />
+                <ScalarProperty Name="Employee_Address" ColumnName="Employee_Address" />
+                <ScalarProperty Name="Employee_Phone" ColumnName="Employee_Phone" />
+                <ScalarProperty Name="Employee_Company" ColumnName="Employee_Company" />
+                <ScalarProperty Name="Employee_Join_Date" ColumnName="Employee_Join_Date" />
+                <ScalarProperty Name="Employee_Experience" ColumnName="Employee_Experience" />
+                <ScalarProperty Name="Employee_Career_Level" ColumnName="Employee_Career_Level" />
+                <ScalarProperty Name="Employee_Skill" ColumnName="Employee_Skill" />
+                <ScalarProperty Name="Off_Shore_Start_Date" ColumnName="Off_Shore_Start_Date" />
+                <ScalarProperty Name="Off_Shore_End_Date" ColumnName="Off_Shore_End_Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllEmployeesBySkill" FunctionName="CETDBModel.Store.GetAllEmployeesBySkill">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CETDBModel.GetAllEmployeesBySkill_Result">
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Employee_Full_Name" ColumnName="Employee_Full_Name" />
+                <ScalarProperty Name="Employee_Address" ColumnName="Employee_Address" />
+                <ScalarProperty Name="Employee_Phone" ColumnName="Employee_Phone" />
+                <ScalarProperty Name="Employee_Company" ColumnName="Employee_Company" />
+                <ScalarProperty Name="Employee_Join_Date" ColumnName="Employee_Join_Date" />
+                <ScalarProperty Name="Employee_Experience" ColumnName="Employee_Experience" />
+                <ScalarProperty Name="Employee_Career_Level" ColumnName="Employee_Career_Level" />
+                <ScalarProperty Name="Employee_Skill" ColumnName="Employee_Skill" />
+                <ScalarProperty Name="Off_Shore_Start_Date" ColumnName="Off_Shore_Start_Date" />
+                <ScalarProperty Name="Off_Shore_End_Date" ColumnName="Off_Shore_End_Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
